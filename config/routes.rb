@@ -3,7 +3,7 @@ Rapp::Application.routes.draw do
   get "static_sites/about"
   get "static_sites/contact"
   
-  devise_for :users
+  devise_for :users, controllers: {sessions: "sessions", registrations: "registrations"}
   devise_for :admin, skip:  [:sessions, :registrations]
   
   resources :users, only: :index

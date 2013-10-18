@@ -28,6 +28,16 @@ class UsersController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
+    respond_to do |format|
+      if resource.save
+        format.html { redirect_to admin_root_path, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end  
+
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
