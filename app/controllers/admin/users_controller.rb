@@ -4,7 +4,11 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order('type asc')
+    users = User.order('type asc')
+    @confirmed_users = users.where(confirmed: true)
+    @unconfirmed_users = users.where(confirmed: false)
+
+
 
     respond_to do |format|
       format.html # index.html.erb

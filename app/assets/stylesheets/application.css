@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+
+.panel-group div div h4 a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.panel-group div div h4 a:hover {
+    text-decoration: none;
+    color: #000;
+    background-color: #f5f5f5;
+}

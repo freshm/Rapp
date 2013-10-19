@@ -1,32 +1,78 @@
-<h1>Listing users</h1>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title text-center">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Confirmed Users
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Email</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+          <tbody>
+            <% @confirmed_users.each do |user| %>
+              <tr>
+                <td><%= user.firstname %></td>
+                <td><%= user.lastname %></td>
+                <td><%= user.email %></td>
+                <td><%= link_to "Show", admin_user_path(user) %></td>
+                <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+                <td><%= link_to "Delete", admin_user_path(user), method: :delete,
+                                                                 data: { confirm: 'Are you sure?' } unless user.admin? %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title text-center">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Unconfirmed Users
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.firstname %></td>
-        <td><%= user.lastname %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to "Show", admin_user_path(user) %></td>
-        <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
-        <td><%= link_to "Delete", admin_user_path(user), method: :delete,
-                                                         data: { confirm: 'Are you sure?' } unless user.admin? %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-  
-<%= link_to "New User", new_admin_user_path %>
-
+          <tbody>
+            <% @unconfirmed_users.each do |user| %>
+              <tr>
+                <td><%= user.firstname %></td>
+                <td><%= user.lastname %></td>
+                <td><%= user.email %></td>
+                <td><%= link_to "Show", admin_user_path(user) %></td>
+                <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+                <td><%= link_to "Delete", admin_user_path(user), method: :delete,
+                                                                 data: { confirm: 'Are you sure?' } unless user.admin? %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
