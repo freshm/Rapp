@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    users = User.order('type asc')
+    users = User.order('type desc')
     @confirmed_users = users.where(confirmed: true)
     @unconfirmed_users = users.where(confirmed: false)
 
@@ -58,7 +58,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to [:admin, @user], notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,6 +75,13 @@ class Admin::UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  def confirm
+    @user = User.find(params[:user_id])
+    @user.confirmed = true
+    @user.save
+    redirect_to admin_users_path
   end
 
   private

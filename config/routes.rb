@@ -9,7 +9,9 @@ Rapp::Application.routes.draw do
   resources :users, only: :index
   
   namespace :admin do
-    resources :users
+    resources :users do
+      get :confirm
+    end
     root :to => 'users#index'
   end
   
