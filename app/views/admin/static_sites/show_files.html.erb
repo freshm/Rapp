@@ -1,0 +1,28 @@
+<%= render 'admin/sidebar' %>
+<div class="col-md-10">
+	<div class="row">
+		<ul class="list-group">
+			<h1>Location: <%= @path %></h1>
+			<% @files.each do |file| %>
+				<% if File.directory?(file) %>
+					<li class="list-group-item"><%= link_to file.to_s[@range + 8..-1], admin_static_sites_show_files_path(file.to_s[7..-1].gsub("/", "-")) %></li>
+				<% else %>
+					<li class="list-group-item"><%= link_to file.to_s[(@range + 8)..-1], file[/\/.*/] %></li>
+				<% end %>
+			<% end %>
+			<br />
+			<% unless @path == "Root" %>
+				<div class="text-center">
+					<% if @path.rindex("/") %>
+						<%= link_to "Back", admin_static_sites_show_files_path(@path.to_s[0..(@path.rindex("/") -1 )].gsub("/", "-")), class: "btn btn-primary btn-lg" %>
+					<% else %>
+						<%= link_to "Back", admin_static_sites_show_files_path("root"), class: "btn btn-primary btn-lg" %>
+					<% end %>
+				</div>
+			<% end %>	
+			<button type="button" class="btn btn-default btn-lg">
+		  <span class="glyphicon glyphicon-star"></span> Star
+		</button>
+		</ul>
+	</div>
+</div>

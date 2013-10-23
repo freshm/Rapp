@@ -1,18 +1,22 @@
 Rapp::Application.routes.draw do
-  root 'static_sites#index'
+  resources :blog_posts
+
+  root 'blog_posts#index'
   get "static_sites/about"
   get "static_sites/contact"
+  get "static_sites/show_files/:path", to: "static_sites#show_files", as: "static_sites_show_files"
   
   devise_for :users, controllers: {sessions: "sessions", registrations: "registrations"}
   devise_for :admin, skip:  [:sessions, :registrations]
-  
-  resources :users, only: :index
-  
+
   namespace :admin do
     resources :users do
       get :confirm
     end
+    resources :admin, only: [:edit, :update]
+    resources :blog_posts
     root :to => 'users#index'
+    get "static_sites/show_files/:path", to: "static_sites#show_files", as: "static_sites_show_files"
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
