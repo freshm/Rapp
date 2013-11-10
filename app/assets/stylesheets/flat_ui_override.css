@@ -1,0 +1,15 @@
+.btn {
+	border-radius: 0;
+}
+
+.navbar-inverse {
+	border-radius: 0;
+}
+
+.list-group-item:first-child {
+	border-radius: 0;
+}
+
+.list-group-item:last-child {
+	border-radius: 0;
+}
