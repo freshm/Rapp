@@ -13,3 +13,7 @@
 .list-group-item:last-child {
 	border-radius: 0;
 }
+
+.login-custom {
+	margin-top: 10%;
+}

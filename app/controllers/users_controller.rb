@@ -1,4 +1,5 @@
 class UsersController < Devise::RegistrationsController
+  before_filter :no_access
   prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
   prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
 

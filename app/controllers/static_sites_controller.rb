@@ -1,4 +1,5 @@
 class StaticSitesController < ApplicationController
+  before_filter :no_access
   before_filter :no_one!, only: :show_files
   def index
   end

@@ -1,4 +1,5 @@
 class BlogPostsController < ApplicationController
+  before_filter :no_access
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
 
   # GET /blog_posts

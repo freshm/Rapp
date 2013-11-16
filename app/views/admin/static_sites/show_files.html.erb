@@ -5,9 +5,16 @@
 			<h1>Location: <%= @path %></h1>
 			<% @files.each do |file| %>
 				<% if File.directory?(file) %>
-					<li class="list-group-item"><%= link_to file.to_s[@range + 8..-1], admin_static_sites_show_files_path(file.to_s[7..-1].gsub("/", "-")) %></li>
+					<li class="list-group-item">
+						<%= link_to ("#{image_tag('flat_icon/contacts-64.png')}#{file.to_s[@range + 8..-1]}").html_safe, admin_static_sites_show_files_path(file.to_s[7..-1].gsub("/", "-")) %>
+					</li>
 				<% else %>
+					
+					<% if file.split('.')[1] == "html" %>
+					<li class="list-group-item"><%= link_to ("#{image_tag('flat_icon/scholarship-64.png')}#{file.to_s[@range + 8..-1]}").html_safe, file[/\/.*/] %></li>
+					<% else %>
 					<li class="list-group-item"><%= link_to file.to_s[(@range + 8)..-1], file[/\/.*/] %></li>
+					<% end %>
 				<% end %>
 			<% end %>
 			<br />
@@ -19,10 +26,7 @@
 						<%= link_to "Back", admin_static_sites_show_files_path("root"), class: "btn btn-primary btn-lg" %>
 					<% end %>
 				</div>
-			<% end %>	
-			<button type="button" class="btn btn-default btn-lg">
-		  <span class="glyphicon glyphicon-star"></span> Star
-		</button>
+			<% end %>
 		</ul>
 	</div>
 </div>
